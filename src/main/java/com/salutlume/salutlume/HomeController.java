@@ -1,8 +1,8 @@
 package com.salutlume.salutlume;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,12 +16,38 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    String hello(){
+    String hello(Model model)
+    {
+        model.addAttribute("greetingSubmission", new Greeting());
+        model.addAttribute("name", "ssalut!");
+        return "home";
+    }
+
+    @PostMapping("/")
+    String insertGreetings(@ModelAttribute Greeting greetingSubmission, Model model){
+        model.addAttribute("greetingSubmission", greetingSubmission);
+        model.addAttribute("name", "Submission added!");
+        greetingRepo.save(greetingSubmission);
+
         return "home";
     }
 
     @GetMapping("/greetings")
-    Iterable<Greeting> greetings(){
-        return greetingRepo.findAll();
+     String greetings(Model model){
+        Iterable<Greeting> greetings = greetingRepo.findAll();
+
+        model.addAttribute("greetings", greetings);
+
+        return "greetings";
     }
+
+//    @GetMapping("/greetings")
+//    Iterable<Greeting> greetings(){
+////        Iterable<Greeting> greetings = greetingRepo.findAll();
+////
+////        model.addAttribute("greeting", greetings);
+//
+//        return greetingRepo.findAll();
+//    }
+
 }

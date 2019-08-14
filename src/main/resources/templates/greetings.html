@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>greetings</title>
 </head>
 <body>
+    <h1>
+        Here are the greetings:
+    </h1>
+    <div th:each="greeting : ${greetings}">
+        <div th:text="${greeting.getMessage()}">
 
+        </div>
+    </div>
 </body>
 </html>

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -9,10 +11,15 @@
 </div>
 <div class = "container">
     Say hello:
-    <form>
+    <form method="post" th:object="${greetingSubmission}" >
         Message:<br>
-        <input type = "text" name = "message">
+        <input type = "text" th:field="*{message}">
+        <input type="submit" value="Submit">
     </form>
+</div>
+
+<div th:text="${name}">
+
 </div>
 <body>
 
