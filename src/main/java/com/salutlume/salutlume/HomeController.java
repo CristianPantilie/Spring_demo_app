@@ -19,7 +19,6 @@ public class HomeController {
     String hello(Model model)
     {
         model.addAttribute("greetingSubmission", new Greeting());
-        model.addAttribute("name", "ssalut!");
         return "home";
     }
 
