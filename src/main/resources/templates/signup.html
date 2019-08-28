@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign up</title>
+</head>
+<body>
+    <h1>Sign-up</h1>
+
+    <form method="POST" th:action="@{/signup}" th:object="${user}" id="signupForm">
+
+        <label for="username">Username: </label>
+        <input type="text" name="username">
+
+        <label for="password">Password: </label>
+        <input type="password" name="password"/><br/>
+
+        <label for="confirm">Confirm password: </label>
+        <input type="password" name="confirm"/><br/>
+
+        <input type="submit" name="submit">
+    </form>
+
+</body>
+</html>

@@ -1,31 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<div>
-    Salut lume.
-</div>
-<div class = "container">
-    Say hello:
-    <form method="post" th:object="${greetingSubmission}" >
-        <input type = "text" th:field="*{message}">
-        <input type="submit" value="Submit">
-    </form>
-</div>
-<div>
-    <form method="get" action="/greetings">
-        <button type="submit">View all greetings</button>
-    </form>
-</div>
-
-<div th:text="${name}">
-
-</div>
 <body>
+    <h1 >
+        Salut lume.
+    </h1>
+    <div sec:authorize="!isAuthenticated()">
+        Please log in to say hello.
+        <form method="get" action="/login">
+            <button type="submit">Log in</button>
+        </form>
+        <form method="get" action="/signup">
+            <button type="submit">Sign up</button>
+        </form>
+    </div>
+    <div sec:authorize="isAuthenticated()" >
+         <div th:inline="text">
+        Logged in as [[${#httpServletRequest.remoteUser}]].
+        </div>
+        Say hello:
+        <form method="post" th:object="${greetingSubmission}" >
+            <input type = "text" th:field="*{message}">
+            <input type="submit" value="Submit">
+        </form>
+
+        <div>
+            <form method="get" action="/greetings">
+                <button type="submit">View all greetings</button>
+            </form>
+        </div>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign out" />
+        </form>
+        <div th:text="${name}">
+
+        </div>
+    </div>
+
+
+
+
+
+
 
 </body>
 </html>
